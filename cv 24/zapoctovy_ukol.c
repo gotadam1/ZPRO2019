@@ -112,11 +112,11 @@ void vypis_datum(datum date)
 {
     if (date.den == 0 && date.mesic == 0 && date.rok == 0)
     {
-        printf("               ");
+        printf("                ");
     }
     else
     {
-            printf(" %d.%d.%d    ", date.den, date.mesic, date.rok);
+            printf(" %d.%d.%d     ", date.den, date.mesic, date.rok);
         if(date.den < 10 && date.mesic < 10)
         {
             printf("  ");
@@ -133,11 +133,11 @@ void fvypis_datum(datum date, FILE* soubor)
 {
     if (date.den == 0 && date.mesic == 0 && date.rok == 0)
     {
-        fprintf(soubor, "               ");
+        fprintf(soubor, "                ");
     }
     else
     {
-            fprintf(soubor, " %d.%d.%d    ", date.den, date.mesic, date.rok);
+            fprintf(soubor, " %d.%d.%d     ", date.den, date.mesic, date.rok);
         if(date.den < 10 && date.mesic < 10)
         {
             fprintf(soubor, "  ");
@@ -176,10 +176,9 @@ void fvypis_data(data_typ* data, FILE* soubor)
 			data->odpovedna
     );
     fvypis_datum(data->date, soubor);
-    fprintf(soubor, ";%s;%s\n",
+    fprintf(soubor, ";%s;%s",
     data->kontrolujici,
-    data->stav
-    );
+    data->stav);
 
 }
 
@@ -207,7 +206,7 @@ bool fgetLine(FILE* soubor, char* string, int maxDelka)
     }
 }
 
-// funkce pro nacteni dat z radku, rovnou zknotroluje, zda jsou na radku vsechna data
+// funkce pro nacteni dat z radku, rovnou zkontroluje, zda jsou na radku vsechna data
 int extrahuj_data(data_typ* data, char* string)
 {
     // diky predem danemu formatu maji data presne umisteni v radku
@@ -237,7 +236,7 @@ int extrahuj_data(data_typ* data, char* string)
     {
         data->kontrolujici[i-87] = string[i];
     }
-    for(int i = 108; i < 121; i++)
+    for(int i = 108; i< 121; i++)
     {
         data->stav[i-108] = string[i];
     }
@@ -350,10 +349,13 @@ void vypis_seznam(spojovy_seznam s)
 void fvypis_seznam(spojovy_seznam s, FILE* soubor)
 {
 	uzel* aktualni = s.zacatek;
-	while (aktualni != s.konec) {
+	while (aktualni->naslednik != s.konec) {
 		fvypis_data(aktualni->data, soubor);
+        fprintf(soubor, "\n");
 		aktualni = aktualni->naslednik;
 	}
+    fvypis_data(aktualni->data, soubor);
+    
 }
 
 // funkce pro vypsani polozek jejichy stav neni OK
@@ -418,8 +420,8 @@ void zrus_seznam(spojovy_seznam* s)
 // funkce pro kontrolu formatu inventarniho cisla
 bool zkontroluj_cislo(char* string)
 {
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
     sscanf(string," Z8-%d/%d  ", &x, &y);
     if(x > 9999999 && x < 100000000 && y > 99 && y < 1000)
     {
@@ -489,6 +491,7 @@ void prerovnat_seznam(spojovy_seznam* s)
         vyjmout_prvek(max(s), s);
         aktualni = aktualni->naslednik;
     }
+    aktualni->naslednik = NULL;
     r->konec = aktualni;
     s->zacatek = r->zacatek;
     s->konec = r->konec;
