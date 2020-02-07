@@ -1,0 +1,11 @@
+# Nazev polozky   ; Typ polozky ; Inventarni cislo ; Odpovedna osoba ; Datum kontroly ; Kontrolujici osoba ; Stav polozky
+stul G            ; nabytek     ; Z8-99999999/111  ; Jan Novak       ; 1.12.2019     ; Josef Kozel        ; OK
+stul I            ; nabytek     ; Z8-12345689/111  ; Jan Novak       ; 1.12.2019     ; Josef Kozel        ; OK
+stul J            ; nabytek     ; Z8-12345687/111  ; Jan Novak       ;               ;                    ;
+stul D            ; nabytek     ; Z8-12345685/111  ; Jan Novak       ; 1.12.2019     ; Josef Kozel        ; OK
+stul B            ; nabytek     ; Z8-12345683/111  ; Jan Novak       ; 1.12.2019     ; Josef Kozel        ; OK
+schodiste         ; stavebni    ; Z8-12345681/110  ; Jan Novak       ; 1.1.2019      ; Josef Kozel        ; chybi
+dvere             ; nabytek     ; Z8-12345680/110  ; Jan Novak       ; 11.12.2019    ; Josef Kozel        ; nenalezeno
+stul A            ; nabytek     ; Z8-12345679/111  ; Jan Novak       ; 1.12.2019     ; Josef Kozel        ; poskozeno
+kancelarska zidle ; nabytek     ; Z8-12345678/111  ; Jan Novak       ; 1.12.2019     ; Josef Kozel        ; OK
+stul E            ; nabytek     ; Y3-1234568/9999  ; Jan Novak       ; 1.12.2019     ; Josef Kozel        ; OK
